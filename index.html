@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+
+<title>TweetBeat Beta</title>
+
+<link rel="stylesheet" href="tweetbeatbeta2.css" type="text/css" media="screen" />
+
+<script src="beatsequencermodel.js" type="text/javascript" charset="utf-8"></script>
+
+<script language="javascript">
+function playEarth()
+{
+   document.getElementById("ambientBG").innerHTML="<embed src='/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/Computers2.m4a' autostart=true loop=false volume=100 hidden=true autobuffer="autobuffer" preload="true">";
+   return true;
+}
+function stopEarth()
+{
+   document.getElementById("ambientBG").innerHTML="<embed src='/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/Computers2.m4a' autostart=true loop=false volume=0 hidden=true>";
+   return false;
+}
+function playWater()
+{
+   document.getElementById("ambientBG").innerHTML="<embed src='/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/Train.wav' autostart=true loop=false volume=100 hidden=true autobuffer="autobuffer" preload="true">";
+   return true;
+}
+function stopWater()
+{
+   document.getElementById("ambientBG").innerHTML="<embed src='/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/Train.m4a' autostart=true loop=false volume=0 hidden=true >";
+   return false;
+}
+function playAir()
+{
+   document.getElementById("ambientBG").innerHTML="<embed src='http://dl.dropbox.com/u/109131465/TweetBeat/Ambiances/Train2.mp3' autostart=true loop=true volume=100 hidden=true preload="true">";
+   return true;
+}
+function stopAir()
+{
+   document.getElementById("ambientBG").innerHTML="<embed src='/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/Train.m4a' autostart=true loop=false volume=0 hidden=true>";
+   return false;
+}
+function playFire()
+{
+   document.getElementById("ambientBG").innerHTML="<embed src='/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/bass.wav' loop=true volume=100 hidden=true autobuffer="autobuffer" preload="true">";
+   return true;
+}
+function stopFire()
+{
+   document.getElementById("ambientBG").innerHTML="<embed src='/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/Train.m4a' autostart=true loop=false volume=0 hidden=true>";
+   return false;
+}
+
+
+
+function createsoundbite(sound){
+  var html5audio=document.createElement('audio')
+	if (html5audio.canPlayType){ //check support for HTML5 audio
+		for (var i=0; i<arguments.length; i++){
+			var sourceel=document.createElement('source')
+			sourceel.setAttribute('src', arguments[i])
+			if (arguments[i].match(/\.(\w+)$/i))
+				sourceel.setAttribute('type', html5_audiotypes[RegExp.$1])
+			html5audio.appendChild(sourceel)
+		}
+		html5audio.load()
+		html5audio.playclip=function(){
+			html5audio.pause()
+			html5audio.currentTime=0
+			html5audio.play()
+		}
+		return html5audio
+	}
+	else{
+		return {playclip:function(){throw new Error("Your browser doesn't support HTML5 audio unfortunately")}}
+	}
+}
+
+var airSound=createsoundbite("/Ambiances/Train2.ogg", "/Ambiances/Train2.mp3")
+
+</script>
+
+//Ambient Background Sound Script
+<script language="javascript" type="text/javascript">
+function playSound(soundfile) {
+  document.getElementById("ambaudio").innerHTML=
+    "<embed src=\""+soundfile+"\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
+}
+</script>
+
+</head>
+
+<body onLoad="preloadImages()">
+<div id="content">
+	<div id="banner">
+    <h1>TweetBeat Beta 2</h1>
+    <div id="run">
+            <form id="runForm" action="javascript:runLoop()">
+            <div>
+            <input id="runButton" type="image" src="img/rungrid.png" />
+            </div>
+            </form>
+        </div>
+        <div id="tempoBox" style="">
+        	<input id="tempoValue" type="text" value="120" onKeyPress="return numbersonly(event, false)" onBlur="tempoChange()" />bpm
+        </div>
+    </div>
+    <div id="container">
+    <span id="ambaudio"></span>
+    <a href="#" onclick="playSound('Ambiances/NorwichTown.wav');"><img src="https://dl.dropbox.com/u/109131465/TweetBeat/img/fire.png" /></a>
+<img src="img/button_75px.png" onclick="stopEarth()"/>
+
+<img id="water" src="img/water.png" onclick="playWater()" />
+<img src="img/buttonblue_v2.png" onclick="stopWater()"/>
+
+<img id="air" src="img/buttonblue_v2.png" onclick="playAir()" />
+<img id="fire" src="img/fire.png" onclick="playFire()" />
+
+    <div id="sticker"></div>
+    
+	<div id="editor">
+        <div id="numbers"></div>
+        <div id="labels"></div>
+        <div id="grid">
+        	<div id="frame">
+        	<img id="frame1" src="img/frame.png" />
+        	</div>
+	        <div id="row7">
+                <div id="button7-1"><img id="img7-1" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img7-1')" onMouseUp="gridAction('img7-1')" /></div>
+            </div>
+        	<div id="row6">
+                <div id="button6-1"><img id="img6-1" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img6-1')" onMouseUp="gridAction('img6-1')" /></div>
+                <div id="button6-2"><img id="img6-2" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img6-2')" onMouseUp="gridAction('img6-2')" /></div>
+            </div>
+        	<div id="row5">
+                <div id="button5-1"><img id="img5-1" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img5-1')" onMouseUp="gridAction('img5-1')" /></div>
+                <div id="button5-2"><img id="img5-2" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img5-2')" onMouseUp="gridAction('img5-2')" /></div>
+                <div id="button5-3"><img id="img5-3" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img5-3')" onMouseUp="gridAction('img5-3')" /></div>
+            </div>
+            <div id="row4">
+                <div id="button4-1"><img id="img4-1" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img4-1')" onMouseUp="gridAction('img4-1')" /></div>
+                <div id="button4-2"><img id="img4-2" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img4-2')" onMouseUp="gridAction('img4-2')" /></div>
+                <div id="button4-3"><img id="img4-3" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img4-3')" onMouseUp="gridAction('img4-3')" /></div>
+                <div id="button4-4"><img id="img4-4" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img4-4')" onMouseUp="gridAction('img4-4')" /></div>
+            </div>
+            <div id="row3">
+                <div id="button3-1"><img id="img3-1" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img3-1')" onMouseUp="gridAction('img3-1')" /></div>
+                <div id="button3-2"><img id="img3-2" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img3-2')" onMouseUp="gridAction('img3-2')" /></div>
+                <div id="button3-3"><img id="img3-3" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img3-3')" onMouseUp="gridAction('img3-3')" /></div>
+            </div>
+            <div id="row2">
+                <div id="button2-1"><img id="img2-1" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img2-1')" onMouseUp="gridAction('img2-1')" /></div>
+                <div id="button2-2"><img id="img2-2" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img2-2')" onMouseUp="gridAction('img2-2')" /></div>
+            </div>
+            <div id="row1">
+                <div id="button1-1"><img id="img1-1" src="img/buttonblue_v2.png" alt="button" onMouseDown="buttonDepress('img1-1')" onMouseUp="gridAction('img1-1')" /></div>
+	            </div>
+    </div>
+        <div id="lights" class="nodisplay">
+            <div id="light1"><img id="imgl-1" src="images/light-off.png" alt="light" /></div>
+            <div id="light2"><img id="imgl-2" src="images/light-off.png" alt="light" /></div>
+            <div id="light3"><img id="imgl-3" src="images/light-off.png" alt="light" /></div>
+            <div id="light4"><img id="imgl-4" src="images/light-off.png" alt="light" /></div>
+            <div id="light5"><img id="imgl-5" src="images/light-off.png" alt="light" /></div>
+            <div id="light6"><img id="imgl-6" src="images/light-off.png" alt="light" /></div>
+            <div id="light7"><img id="imgl-7" src="images/light-off.png" alt="light" /></div>
+            <div id="light8"><img id="imgl-8" src="images/light-off.png" alt="light" /></div>
+            <div id="light9"><img id="imgl-9" src="images/light-off.png" alt="light" /></div>
+            <div id="light10"><img id="imgl-10" src="images/light-off.png" alt="light" /></div>
+            <div id="light11"><img id="imgl-11" src="images/light-off.png" alt="light" /></div>
+            <div id="light12"><img id="imgl-12" src="images/light-off.png" alt="light" /></div>
+            <div id="light13"><img id="imgl-13" src="images/light-off.png" alt="light" /></div>
+            <div id="light14"><img id="imgl-14" src="images/light-off.png" alt="light" /></div>
+            <div id="light15"><img id="imgl-15" src="images/light-off.png" alt="light" /></div>
+            <div id="light16"><img id="imgl-16" src="images/light-off.png" alt="light" /></div>
+        </div>
+    </div>
+</div>
+
+<div class="nodisplay">
+        <audio id="b1" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/bass.wav" autobuffer="autobuffer" preload="true">Try using an HTML 5-enabled browser like <a href="http://www.apple.com/safari/download/">Safari</a> to make this page work.</audio>
+        <audio id="s1" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/oh1.wav" autobuffer="autobuffer"></audio>
+        <audio id="ch1" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/gt.wav" autobuffer="autobuffer"></audio>
+        <audio id="oh1" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/oh1.wav" autobuffer="autobuffer" preload="true"></audio><br />
+        
+        <audio id="b2" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/bass.wav"></audio>
+        <audio id="s2" src="samples/snare.wav"></audio>
+        <audio id="ch2" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/gt1.wav"></audio>
+        <audio id="oh2" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/oh1.wav"></audio><br />
+        
+        <audio id="b3" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/bass.wav"></audio>
+        <audio id="s3" src="samples/snare.wav"></audio>
+        <audio id="ch3" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/gt3.wav"></audio>
+        <audio id="oh3" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/oh1.wav"></audio><br />
+        
+        <audio id="b4" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/bass.wav"></audio>
+        <audio id="s4" src="samples/snare.wav"></audio>
+        <audio id="ch4" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/gt2.wav"></audio>
+        <audio id="oh4" src="Ambiances/oh1.wav" preload="true"></audio><br />
+        
+        <audio id="b5" src="/Users/Sam/Desktop/UEA/BA Music & Tech/Year 2/Online Media & Archiving/TweetBeat/Ambiances/bass.wav"></audio>
+        <audio id="s5" src="samples/snare.wav"></audio>
+        <audio id="ch5" src="samples/hhc.wav"></audio>
+        <audio id="oh5" src="Ambiances/oh1.wav"></audio><br />
+        
+        
+    </div>
+
+
+
+<div id="ambientBG">
+</div>
+
+
+</body>
+</html>
